@@ -73,14 +73,20 @@ nav .btn:hover{background:var(--orange)}
 }
 
 /* hero */
-.hero{background:linear-gradient(180deg,var(--sky-l) 0%,var(--neutral) 100%);padding:72px 0 0;overflow:hidden;position:relative}
-.hero .wrap{position:relative;z-index:2}
-.hero h1{max-width:12ch}
-.hero p.lead{font-size:1.25rem;max-width:34ch;color:var(--ink2)}
-.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 24px}
-.hero .mark{position:absolute;right:max(20px,calc(50% - 520px));top:48px;width:min(400px,34vw);z-index:1;opacity:.95}
-@media(max-width:900px){.hero .mark{display:none}}
-.horizon{display:block;width:100%;height:clamp(120px,16vw,220px);margin-top:-8px}
+/* a primeira tela ocupa a altura da janela: a próxima seção não aparece cortada embaixo */
+.hero{background:linear-gradient(180deg,var(--sky-l) 0%,var(--neutral) 100%);padding:0;overflow:hidden;display:flex;flex-direction:column;
+  min-height:max(560px,calc(100vh - 68px));min-height:max(560px,calc(100svh - 68px))}
+.hero-in{flex:1;width:100%;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:center;gap:48px;padding-top:48px;padding-bottom:16px}
+.hero h1{margin-bottom:.35em}
+.hero .hl{white-space:nowrap}
+.hero p.lead{font-size:clamp(1.1rem,1.6vw,1.3rem);line-height:1.55;max-width:36ch;color:var(--ink2);text-wrap:pretty;margin-bottom:0}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.hero .mark{display:block;width:100%;max-width:400px;height:auto;aspect-ratio:140/72;justify-self:end}
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:0;padding-top:40px}
+  .hero .mark{display:none}
+}
+.horizon{display:block;width:100%;height:clamp(80px,10vw,150px);flex:none}
 
 /* cards 3 */
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
@@ -104,8 +110,8 @@ nav .btn:hover{background:var(--orange)}
 .card .head::before{content:"";align-self:stretch;width:8px;background:var(--c);flex:none}
 .card .head h3{margin:0;flex:1}
 .card .head small{display:block;font:600 .7rem var(--fh);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:4px}
-.card .chev{transition:transform .2s;font-size:1.2rem}
-.card.open .chev{transform:rotate(180deg)}
+.card .chev{flex:none;width:10px;height:10px;margin:0 6px 4px 0;border:solid var(--navy);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);transition:transform .2s}
+.card.open .chev{transform:translateY(4px) rotate(-135deg)}
 .card .body{display:none;padding:0 18px 18px 22px}
 .card.open .body{display:block}
 .card ul{margin:0 0 12px;padding-left:20px} .card li{margin-bottom:6px}
@@ -122,7 +128,7 @@ nav .btn:hover{background:var(--orange)}
 .sq .n{background:var(--orange)} .sq .s{background:var(--blue);color:var(--white)} .sq .a{background:var(--sun)} .sq .r{background:var(--white);border-style:dashed}
 .sq small{font:400 .8rem var(--fb)}
 .sq a:hover{transform:translateY(-3px);box-shadow:0 4px 0 var(--navy)}
-.sq .soon{opacity:.7;border-style:dashed}
+.sq .soon{background:transparent;color:var(--ink2);border-style:dashed;border-color:var(--blue)}
 .leg{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;margin-bottom:8px}
 .leg i{display:inline-block;width:14px;height:14px;border:2px solid var(--navy);margin-right:6px;vertical-align:-2px;border-radius:4px}
 .org{background:var(--white);border-radius:var(--r);padding:22px;margin-top:28px;position:relative;box-shadow:var(--shadow)}
@@ -167,9 +173,11 @@ details p{margin:10px 0 0}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:820px){.two{grid-template-columns:1fr}}
 .two div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:22px}
-footer{background:var(--navy);color:rgba(255,255,255,.85);padding:0 0 40px;font-size:.9rem}
+footer{background:var(--navy);color:rgba(255,255,255,.85);padding:0 0 88px;font-size:.9rem}
 footer .wrap{border-top:1px solid rgba(255,255,255,.15);padding-top:24px;display:flex;gap:16px 28px;flex-wrap:wrap;justify-content:space-between;align-items:center}
 footer .brand{color:var(--white);--logo-base:var(--blue)}
+.foot-meta{display:flex;flex-direction:column;gap:4px;text-align:right}
+@media(max-width:700px){.foot-meta{text-align:left}}
 
 /* dev bar */
 .dev{position:fixed;left:12px;bottom:12px;z-index:30;background:var(--navy);color:var(--white);border-radius:12px;padding:8px 12px;font-size:.82rem;display:flex;gap:10px;align-items:center;box-shadow:0 2px 10px #0004}
@@ -180,17 +188,19 @@ footer .brand{color:var(--white);--logo-base:var(--blue)}
 <body>
 <!-- Símbolo Alvorada: duas linhas que se encontram e se abrem formando o A -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="sym" viewBox="0 0 140 70">
-    <path fill="#8CC4F0" d="M14 58C30 38 46 3 62 3C77 3 92 26 116 47C96 36 80 19 63 19C50 19 38 37 26 57Z"/>
-    <path fill="#F2701F" d="M48 41C76 33 100 55 134 54A5.5 5.5 0 0 1 134 65C100 66 78 47 48 41Z"/>
-    <path style="fill:var(--logo-base,#0F2552)" d="M2 61C22 57 38 37 70 36C46 44 32 69 9 69Q1 69 2 61Z"/>
+  <symbol id="sym" viewBox="0 0 140 72">
+    <!-- arco (céu): nasce de dentro da onda e se abre para a direita -->
+    <path fill="#8CC4F0" d="M18 60C32 40 46 3 62 3C77 3 94 27 118 48C96 37 80 19 63 19C50 19 40 38 30 58Z"/>
+    <!-- onda contínua: laranja por baixo, azul profundo por cima com passagem diagonal -->
+    <path fill="#F2701F" d="M2 64C22 60 36 40 60 39C84 38 100 54 134 54A5.5 5.5 0 0 1 134 65C100 66 82 50 60 50C40 50 28 70 8 70Q0 70 2 64Z"/>
+    <path style="fill:var(--logo-base,#0F2552)" d="M2 64C22 60 36 40 60 39C66 38.75 71.5 39.56 76.9 40.9C66 42 60 50 51.5 51.2C36.2 55.6 25 70 8 70Q0 70 2 64Z"/>
   </symbol>
 </svg>
 <a class="sr" href="#propostas">Ir para as propostas</a>
 
 <header class="top"><div class="wrap bar">
   <a class="brand" href="#inicio" aria-label="Alvorada, Grêmio Politécnico, início">
-    <svg class="logo" width="56" height="28" aria-hidden="true"><use href="#sym"/></svg>
+    <svg class="logo" width="56" height="29" aria-hidden="true"><use href="#sym"/></svg>
     <span><span class="name">Alvorada</span><span class="sub">Grêmio Politécnico</span></span>
   </a>
   <button class="menu" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -202,17 +212,19 @@ footer .brand{color:var(--white);--logo-base:var(--blue)}
 
 <main>
 <section class="hero" id="inicio">
-  <svg class="mark" viewBox="0 0 140 70" aria-hidden="true"><use href="#sym"/></svg>
-  <div class="wrap">
-    <span class="eyebrow">Novos horizontes para a Poli</span>
-    <h1>Um Grêmio <span class="hl">que funciona.</span></h1>
-    <p class="lead">Contas em ordem, negócios que dão resultado e serviços para quem estuda na Poli.</p>
-    <div class="cta"><a class="btn" href="#propostas">Ver as propostas</a><a class="btn ghost" href="#ideias">Contar minha ideia</a></div>
+  <div class="wrap hero-in">
+    <div class="hero-txt">
+      <span class="eyebrow">Novos horizontes para a Poli</span>
+      <h1>Um Grêmio <span class="hl">que funciona.</span></h1>
+      <p class="lead">Contas em ordem, negócios que dão resultado e serviços para quem estuda&nbsp;na&nbsp;Poli.</p>
+      <div class="cta"><a class="btn" href="#propostas">Ver as propostas</a><a class="btn ghost" href="#ideias">Contar minha ideia</a></div>
+    </div>
+    <svg class="mark" viewBox="0 0 140 72" aria-hidden="true"><use href="#sym"/></svg>
   </div>
-  <svg class="horizon" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#8CC4F0" d="M0 170C320 70 640 30 940 70C1140 96 1300 70 1440 40V74C1300 110 1140 136 940 110C640 74 320 110 0 206Z"/>
-    <path fill="#F2701F" d="M620 140C900 112 1160 190 1440 172V206C1160 220 900 160 620 140Z"/>
-    <path fill="#0F2552" d="M0 212C240 196 440 132 760 128C470 152 260 220 0 220Z"/>
+  <svg class="horizon" viewBox="0 0 1440 215" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#8CC4F0" d="M0 150C300 60 560 20 820 40C1060 58 1260 40 1440 10V44C1260 76 1060 96 820 78C560 58 300 100 0 184Z"/>
+    <path fill="#F2701F" d="M0 176C260 160 460 112 720 110C980 108 1200 150 1440 140V186C1200 196 980 150 720 148C460 146 260 196 0 200Z"/>
+    <path fill="#0F2552" d="M0 176C260 160 460 112 720 110C772 109.6 822.4 111 871.7 113.3C760 118 700 146 606.6 150.3C398.7 160 221 196.6 0 200Z"/>
   </svg>
 </section>
 
@@ -314,7 +326,7 @@ footer .brand{color:var(--white);--logo-base:var(--blue)}
 </section>
 </main>
 
-<footer><div class="wrap"><a class="brand" href="#inicio" aria-label="Alvorada, Grêmio Politécnico, voltar ao início"><svg class="logo" width="56" height="28" aria-hidden="true"><use href="#sym"/></svg><span><span class="name">Alvorada</span><span class="sub">Grêmio Politécnico</span></span></a><span>Chapa para a gestão 2027 do Grêmio Politécnico</span><span>Protótipo: nome e identidade visual provisórios. <span class="pend"><span class="tag">[CONFIRMAR: identificação exigida em material de campanha]</span></span></span></div></footer>
+<footer><div class="wrap"><a class="brand" href="#inicio" aria-label="Alvorada, Grêmio Politécnico, voltar ao início"><svg class="logo" width="56" height="29" aria-hidden="true"><use href="#sym"/></svg><span><span class="name">Alvorada</span><span class="sub">Grêmio Politécnico</span></span></a><div class="foot-meta"><span>Chapa para a gestão 2027 do Grêmio Politécnico</span><span>Protótipo: nome e identidade visual provisórios. <span class="pend"><span class="tag">[CONFIRMAR: identificação exigida em material de campanha]</span></span></span></div></div></footer>
 
 <a class="pill" id="pill" href="#ideias"></a>
 <div class="dev"><label><input type="checkbox" id="tp" checked> Destacar pendências</label></div>
@@ -348,7 +360,7 @@ function renderCards(){
     n++;
     const c=document.createElement("div");c.className="card";c.dataset.g=p.g;c.id="p-"+p.id;
     if(p.open)c.classList.add("open");
-    c.innerHTML='<button class="head" aria-expanded="'+!!p.open+'"><span style="flex:1"><small>'+p.g+'</small><h3>'+esc(p.t)+'</h3></span><span class="chev" aria-hidden="true">⌄</span></button>'+
+    c.innerHTML='<button class="head" aria-expanded="'+!!p.open+'"><span style="flex:1"><small>'+p.g+'</small><h3>'+esc(p.t)+'</h3></span><span class="chev" aria-hidden="true"></span></button>'+
       '<div class="body"><ul>'+p.b.map(x=>"<li>"+fmt(x)+"</li>").join("")+'</ul><div class="medir"><b>Como medir:</b> '+esc(p.m)+'</div>'+
       '<button class="fav" aria-pressed="'+fav.has(p.id)+'">'+(fav.has(p.id)?"★ Isso importa para mim":"☆ Isso importa para mim")+'</button></div>';
     c.querySelector(".head").onclick=e=>{p.open=!p.open;c.classList.toggle("open",p.open);e.currentTarget.setAttribute("aria-expanded",p.open);syncToggle()};
