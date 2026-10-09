@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#1B2340">
 <title>Prisma — Um Grêmio que funciona</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231B2340'/%3E%3Cg transform='translate(9 18) scale(.55)'%3E%3Cpolygon points='50,30 10,130 90,130' fill='%23F4F2EC'/%3E%3Cpolygon points='50,30 73.3,23.3 113.3,123.3 90,130' fill='%23E8906A'/%3E%3Cpolygon points='73.3,23.3 96.7,16.7 136.7,116.7 113.3,123.3' fill='%23E0B44E'/%3E%3Cpolygon points='96.7,16.7 120,10 160,110 136.7,116.7' fill='%235BB4E0'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231B2340'/%3E%3Cg transform='translate(9 18) scale(.55)'%3E%3Cpolygon points='50,30 10,130 90,130' fill='%23F4F2EC'/%3E%3Cpolygon points='50,30 73.3,23.3 113.3,123.3 90,130' fill='%235867A0'/%3E%3Cpolygon points='73.3,23.3 96.7,16.7 136.7,116.7 113.3,123.3' fill='%237F8DBF'/%3E%3Cpolygon points='96.7,16.7 120,10 160,110 136.7,116.7' fill='%23AAB4D8'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,9 +16,10 @@
   --navy:#1B2340;   /* Marinho: base, texto (60%) */
   --paper:#FAF9F6;  /* Papel: fundo (30%) */
   --ink-neg:#F4F2EC;/* face do prisma / texto sobre marinho */
-  --coral:#E8906A;  /* acento — oklch .75 .15 40 */
-  --amber:#E0B44E;  /* acento — oklch .75 .15 85 */
-  --sky:#5BB4E0;    /* acento — oklch .75 .15 220 */
+  --coral:#E8906A;  /* acento único — oklch .75 .15 40 */
+  --slate:#5C6C9E;  /* marinho médio (variante tonal) */
+  --slate-l:#C9CFE0;/* marinho claro (variante tonal) */
+  --s1:#3C4A7D; --s2:#5F6FA3; --s3:#8D9AC4; /* faixas do símbolo, versão tonal sobre fundo claro */
   --coral-d:#C4673F;/* coral escuro: hover e foco */
   --paper2:#EDEBE5; /* fundo alternado */
   --ink2:#3A4160;   /* texto secundário */
@@ -43,13 +44,13 @@ p{margin:0 0 1em} a{color:var(--navy)} a:hover{color:var(--coral-d)}
 section{padding:80px 0}
 .sr{position:absolute;left:-9999px}
 .mono,.eyebrow{font-family:var(--fm);font-weight:500;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase}
-.eyebrow{display:block;color:var(--amber);margin-bottom:18px}
+.eyebrow{display:block;color:var(--slate-l);margin-bottom:18px}
 .hl{color:var(--coral)}
 
-/* faixa espectral: três faixas paralelas na inclinação do símbolo (21,8°), sempre Coral → Âmbar → Céu */
+/* faixa tonal: três faixas paralelas na inclinação do símbolo (21,8°), em tons de marinho */
 .band{display:flex;transform:skewX(-21.8deg);pointer-events:none}
 .band i{display:block;flex:none;width:var(--bw,44px)}
-.band i:nth-child(1){background:var(--coral)} .band i:nth-child(2){background:var(--amber)} .band i:nth-child(3){background:var(--sky)}
+.band i:nth-child(1){background:#232D52} .band i:nth-child(2){background:#2B3762} .band i:nth-child(3){background:#344273}
 
 /* número de seção (só visual, em mono) */
 main{counter-reset:sec}
@@ -77,7 +78,7 @@ nav a:hover{color:var(--navy);box-shadow:inset 0 -3px 0 var(--coral)}
 .btn{display:inline-block;border:0;cursor:pointer;font:700 .98rem var(--fb);padding:14px 22px;border-radius:var(--r);text-decoration:none;background:var(--navy);color:var(--ink-neg);transition:transform .15s,filter .15s}
 .btn:hover{color:var(--ink-neg);transform:translateY(-1px);filter:brightness(1.15)}
 .btn.coral{background:var(--coral);color:var(--navy)} .btn.coral:hover{color:var(--navy);filter:brightness(1.05)}
-.btn.alt{background:var(--amber);color:var(--navy)} .btn.alt:hover{color:var(--navy);filter:brightness(1.05)}
+.btn.alt{background:var(--ink-neg);color:var(--navy)} .btn.alt:hover{color:var(--navy);filter:brightness(.96)}
 .btn.ghost{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor;color:var(--navy)}
 nav .btn{padding:9px 18px;margin-left:8px}
 nav .btn:hover{box-shadow:none}
@@ -115,7 +116,7 @@ nav .btn:hover{box-shadow:none}
 .pillar{padding:26px 24px;border-top:5px solid var(--coral)}
 .pillar + .pillar{border-left:1px solid var(--line)}
 @media(max-width:820px){.pillar + .pillar{border-left:0;box-shadow:0 -1px 0 var(--line)}}
-.pillar:nth-child(2){border-top-color:var(--amber)} .pillar:nth-child(3){border-top-color:var(--sky)}
+.pillar:nth-child(2){border-top-color:var(--slate)} .pillar:nth-child(3){border-top-color:var(--navy)}
 .pillar h3{margin-bottom:.5em}
 
 /* propostas */
@@ -129,7 +130,7 @@ nav .btn:hover{box-shadow:none}
 @media(max-width:820px){.grid{grid-template-columns:1fr}}
 .card{background:var(--paper);border:1.5px solid transparent;border-radius:var(--r);overflow:hidden}
 .card.open{border-color:var(--navy);background:#fff}
-.card[data-g=Contas]{--c:var(--navy)} .card[data-g=Negócios]{--c:var(--coral)} .card[data-g=Serviços]{--c:var(--sky)} .card[data-g=Apoio]{--c:var(--amber)}
+.card[data-g=Contas]{--c:var(--navy)} .card[data-g=Negócios]{--c:var(--coral)} .card[data-g=Serviços]{--c:var(--slate)} .card[data-g=Apoio]{--c:var(--slate-l)}
 .card .head{display:flex;align-items:center;gap:14px;width:100%;background:none;border:0;text-align:left;padding:16px 18px 16px 0;cursor:pointer;color:var(--navy);font:inherit}
 .card .head::before{content:"";align-self:stretch;width:8px;background:var(--c);flex:none;transform:skewX(-21.8deg);margin-left:6px}
 .card .head h3{margin:0;flex:1}
@@ -140,7 +141,7 @@ nav .btn:hover{box-shadow:none}
 .card.open .body{display:block}
 .card ul{margin:0 0 14px;padding-left:20px} .card li{margin-bottom:6px}
 .card li::marker{color:var(--coral-d)}
-.medir{background:var(--paper2);border-left:4px solid var(--sky);padding:10px 14px;font-size:.95rem;margin-bottom:14px}
+.medir{background:var(--paper2);border-left:4px solid var(--slate);padding:10px 14px;font-size:.95rem;margin-bottom:14px}
 .medir b{font:500 .72rem var(--fm);letter-spacing:.14em;text-transform:uppercase;margin-right:6px}
 .fav{border:1.5px solid var(--navy);background:transparent;border-radius:var(--r);padding:7px 12px;font:500 .74rem var(--fm);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--navy)}
 .fav[aria-pressed=true]{background:var(--coral);border-color:var(--coral)}
@@ -151,7 +152,7 @@ nav .btn:hover{box-shadow:none}
 .sq{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:24px 0}
 @media(max-width:820px){.sq{grid-template-columns:repeat(2,1fr)}}
 .sq a,.sq div{aspect-ratio:1.25;border-radius:var(--r);padding:14px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:var(--navy);font:700 1rem var(--fh);background:#fff;border:1.5px solid var(--navy);transition:transform .15s,box-shadow .15s}
-.sq .n{background:var(--coral);border-color:var(--coral)} .sq .s{background:var(--sky);border-color:var(--sky)} .sq .a{background:var(--amber);border-color:var(--amber)} .sq .r{background:transparent;border-style:dashed}
+.sq .n{background:var(--coral);border-color:var(--coral)} .sq .s{background:var(--slate);border-color:var(--slate);color:var(--ink-neg)} .sq .a{background:var(--slate-l);border-color:var(--slate-l)} .sq .r{background:transparent;border-style:dashed}
 .sq small{font:500 .66rem var(--fm);letter-spacing:.14em;text-transform:uppercase}
 .sq a:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--navy);color:var(--navy)}
 .sq .soon{background:transparent;color:var(--ink3);border:1.5px dashed var(--ink3)}
@@ -184,7 +185,7 @@ textarea{min-height:110px;resize:vertical}
 .idea p{margin:0;flex:1}
 .idea .meta{font:400 .74rem var(--fm);letter-spacing:.04em;color:var(--ink3);display:block;margin-top:6px}
 .up{border:1.5px solid var(--navy);background:transparent;border-radius:var(--r);padding:6px 10px;font:500 .85rem var(--fm);cursor:pointer;min-width:60px;color:var(--navy)}
-.up[aria-pressed=true]{background:var(--amber);border-color:var(--amber)}
+.up[aria-pressed=true]{background:var(--coral);border-color:var(--coral)}
 .badge{background:var(--navy);color:var(--ink-neg);padding:2px 8px;font:500 .72rem var(--fm);margin-left:10px}
 
 /* faq */
@@ -202,7 +203,7 @@ details p{margin:12px 0 0;max-width:70ch}
 #participe .wrap{position:relative;z-index:1}
 #participe .band{position:absolute;top:-40px;bottom:-40px;right:-30px;--bw:30px;opacity:.95}
 @media(max-width:900px){#participe .band{display:none}}
-#participe a{color:var(--amber)}
+#participe a{color:var(--coral)}
 #participe .btn{color:var(--navy)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(244,242,236,.18);background:var(--navy)}
 @media(max-width:820px){.two{grid-template-columns:1fr}}
@@ -212,6 +213,8 @@ details p{margin:12px 0 0;max-width:70ch}
 footer{background:var(--navy);color:rgba(244,242,236,.75);padding:0 0 88px;font-size:.9rem}
 footer .wrap{border-top:1px solid rgba(244,242,236,.16);padding-top:28px;display:flex;gap:16px 28px;flex-wrap:wrap;justify-content:space-between;align-items:center}
 footer .brand{color:var(--ink-neg);--logo-ink:var(--ink-neg)}
+/* símbolo sobre marinho: faixas tonais mais claras */
+.hero .mark,footer .brand{--s1:#5867A0;--s2:#7F8DBF;--s3:#AAB4D8}
 footer .brand:hover{color:var(--ink-neg)}
 footer .brand .sub{color:rgba(244,242,236,.6)}
 .foot-meta{display:flex;flex-direction:column;gap:4px;text-align:right}
@@ -229,10 +232,10 @@ footer .brand .sub{color:rgba(244,242,236,.6)}
   <symbol id="sym" viewBox="8 8 154 124">
     <!-- face sólida: o compromisso -->
     <polygon style="fill:var(--logo-ink,#1B2340)" points="50,30 10,130 90,130"/>
-    <!-- face lateral: a luz decomposta em Coral, Âmbar e Céu -->
-    <polygon fill="#E8906A" points="50,30 73.3,23.3 113.3,123.3 90,130"/>
-    <polygon fill="#E0B44E" points="73.3,23.3 96.7,16.7 136.7,116.7 113.3,123.3"/>
-    <polygon fill="#5BB4E0" points="96.7,16.7 120,10 160,110 136.7,116.7"/>
+    <!-- face lateral: variante tonal do manual, em tons de marinho -->
+    <polygon style="fill:var(--s1)" points="50,30 73.3,23.3 113.3,123.3 90,130"/>
+    <polygon style="fill:var(--s2)" points="73.3,23.3 96.7,16.7 136.7,116.7 113.3,123.3"/>
+    <polygon style="fill:var(--s3)" points="96.7,16.7 120,10 160,110 136.7,116.7"/>
   </symbol>
 </svg>
 <a class="sr" href="#propostas">Ir para as propostas</a>
@@ -304,7 +307,7 @@ footer .brand .sub{color:rgba(244,242,236,.6)}
       <div><h3>Reunião aberta</h3><p>Pelo menos uma por mês, aberta a todos os alunos. Nelas, qualquer aluno propõe e vota, e cada pessoa tem um voto.</p></div>
     </div>
     <h3>Clique em um quadrado para ver a proposta da área</h3>
-    <div class="leg"><span><i style="background:var(--coral)"></i>Negócios</span><span><i style="background:var(--sky)"></i>Serviços</span><span><i style="background:var(--amber)"></i>Apoio</span><span><i style="border-style:dashed"></i>Representação</span></div>
+    <div class="leg"><span><i style="background:var(--coral)"></i>Negócios</span><span><i style="background:var(--slate)"></i>Serviços</span><span><i style="background:var(--slate-l)"></i>Apoio</span><span><i style="border-style:dashed"></i>Representação</span></div>
     <div class="sq" id="sq"></div>
     <div class="org">
       <span class="stamp">Rascunho</span>
@@ -355,7 +358,7 @@ footer .brand .sub{color:rgba(244,242,236,.6)}
     <h2>Participe</h2>
     <div class="two">
       <div><h3>Conte sua ideia</h3><p>O que você muda no Grêmio se puder mudar uma coisa?</p><a class="btn coral" href="#ideias">Contar minha ideia</a></div>
-      <div><h3>Quer ajudar?</h3><p>Há funções para diferentes disponibilidades de tempo. Você escolhe a área em que quer atuar, e cada área tem um responsável. Quem está começando pode entrar como trainee.</p><button class="btn alt" id="help" type="button">Quero ajudar</button><p id="helpmsg" class="hint" style="color:var(--amber);margin:10px 0 0" hidden>No site de verdade, este botão leva ao formulário. <span class="pend"><span class="tag">[CONFIRMAR: link do formulário]</span></span></p></div>
+      <div><h3>Quer ajudar?</h3><p>Há funções para diferentes disponibilidades de tempo. Você escolhe a área em que quer atuar, e cada área tem um responsável. Quem está começando pode entrar como trainee.</p><button class="btn alt" id="help" type="button">Quero ajudar</button><p id="helpmsg" class="hint" style="color:var(--coral);margin:10px 0 0" hidden>No site de verdade, este botão leva ao formulário. <span class="pend"><span class="tag">[CONFIRMAR: link do formulário]</span></span></p></div>
     </div>
     <p style="margin-top:24px;font-size:.95rem">Privacidade: pedimos só nome, curso e e-mail, para responder você e falar sobre a chapa. O formulário é externo e o site não guarda dados. Você pode pedir a qualquer momento que apaguemos o que enviou, escrevendo para <span class="pend"><span class="tag">[CONFIRMAR: e-mail de contato]</span></span>.</p>
   </div>
