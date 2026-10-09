@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#1B2340">
 <title>Prisma — Um Grêmio que funciona</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231B2340'/%3E%3Cg transform='translate(9 18) scale(.55)'%3E%3Cpolygon points='50,30 10,130 90,130' fill='%23F4F2EC'/%3E%3Cpolygon points='50,30 73.3,23.3 113.3,123.3 90,130' fill='%235867A0'/%3E%3Cpolygon points='73.3,23.3 96.7,16.7 136.7,116.7 113.3,123.3' fill='%237F8DBF'/%3E%3Cpolygon points='96.7,16.7 120,10 160,110 136.7,116.7' fill='%23AAB4D8'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231B2340'/%3E%3Cg transform='translate(9 18) scale(.55)'%3E%3Cpolygon points='50,30 10,130 90,130' fill='%23F4F2EC'/%3E%3Cpolygon points='50,30 120,10 160,110 90,130' fill='%23E8906A'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -19,7 +19,6 @@
   --coral:#E8906A;  /* acento único — oklch .75 .15 40 */
   --slate:#5C6C9E;  /* marinho médio (variante tonal) */
   --slate-l:#C9CFE0;/* marinho claro (variante tonal) */
-  --s1:#3C4A7D; --s2:#5F6FA3; --s3:#8D9AC4; /* faixas do símbolo, versão tonal sobre fundo claro */
   --coral-d:#C4673F;/* coral escuro: hover e foco */
   --paper2:#EDEBE5; /* fundo alternado */
   --ink2:#3A4160;   /* texto secundário */
@@ -45,12 +44,11 @@ section{padding:80px 0}
 .sr{position:absolute;left:-9999px}
 .mono,.eyebrow{font-family:var(--fm);font-weight:500;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase}
 .eyebrow{display:block;color:var(--slate-l);margin-bottom:18px}
+/* ornamento: o prisma em desenho técnico (linhas finas), sem preenchimento */
+.facets{display:block;height:auto;pointer-events:none}
+.facets *{fill:none;stroke:rgba(244,242,236,.13);stroke-width:1.25;vector-effect:non-scaling-stroke}
 .hl{color:var(--coral)}
 
-/* faixa tonal: três faixas paralelas na inclinação do símbolo (21,8°), em tons de marinho */
-.band{display:flex;transform:skewX(-21.8deg);pointer-events:none}
-.band i{display:block;flex:none;width:var(--bw,44px)}
-.band i:nth-child(1){background:#232D52} .band i:nth-child(2){background:#2B3762} .band i:nth-child(3){background:#344273}
 
 /* número de seção (só visual, em mono) */
 main{counter-reset:sec}
@@ -89,10 +87,10 @@ nav .btn:hover{box-shadow:none}
   nav.open{display:flex} nav a{padding:12px} nav .btn{margin:8px 0 0;text-align:center}
 }
 
-/* hero — versão negativa (marinho) com a faixa espectral sangrando na lateral */
-.hero{background:var(--navy);color:var(--ink-neg);padding:0;overflow:hidden;position:relative;display:flex;flex-direction:column;
+/* hero — versão negativa (marinho) com grade técnica e o prisma em desenho de linhas */
+.hero{background-color:var(--navy);background-image:linear-gradient(rgba(244,242,236,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(244,242,236,.04) 1px,transparent 1px);background-size:48px 48px;background-position:center top;color:var(--ink-neg);padding:0;overflow:hidden;position:relative;display:flex;flex-direction:column;
   min-height:max(560px,calc(100vh - 68px));min-height:max(560px,calc(100svh - 68px))}
-.hero .band{position:absolute;top:-60px;bottom:-60px;right:-40px;--bw:46px;z-index:0}
+.hero .facets{position:absolute;right:-140px;bottom:-170px;width:min(820px,70vw);z-index:0}
 .hero-in{position:relative;z-index:1;flex:1;width:100%;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:center;gap:56px;padding-top:56px;padding-bottom:56px}
 .hero h1{margin-bottom:.35em}
 .hero .hl{white-space:nowrap}
@@ -102,11 +100,11 @@ nav .btn:hover{box-shadow:none}
 .hero .mark{display:block;width:100%;max-width:300px;height:auto;aspect-ratio:154/124;justify-self:start;--logo-ink:var(--ink-neg)}
 .hero-foot{position:relative;z-index:1;border-top:1px solid rgba(244,242,236,.16)}
 .hero-foot .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:18px;color:rgba(244,242,236,.62)}
-@media(max-width:1180px){.hero .band{right:-90px;--bw:34px}}
+
 @media(max-width:900px){
   .hero-in{grid-template-columns:1fr;gap:0;padding-top:40px}
   .hero .mark{display:none}
-  .hero .band{right:-70px;--bw:18px}
+  .hero .facets{right:-160px;bottom:-60px;width:520px}
   .hero-foot .wrap span:last-child{display:none}
 }
 
@@ -201,8 +199,8 @@ details p{margin:12px 0 0;max-width:70ch}
 /* participe */
 #participe{background:var(--navy);color:var(--ink-neg);position:relative;overflow:hidden}
 #participe .wrap{position:relative;z-index:1}
-#participe .band{position:absolute;top:-40px;bottom:-40px;right:-30px;--bw:30px;opacity:.95}
-@media(max-width:900px){#participe .band{display:none}}
+#participe .facets{position:absolute;right:-60px;bottom:-90px;width:min(520px,80vw);z-index:0}
+@media(max-width:900px){#participe .facets{opacity:.5}}
 #participe a{color:var(--coral)}
 #participe .btn{color:var(--navy)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(244,242,236,.18);background:var(--navy)}
@@ -213,8 +211,6 @@ details p{margin:12px 0 0;max-width:70ch}
 footer{background:var(--navy);color:rgba(244,242,236,.75);padding:0 0 88px;font-size:.9rem}
 footer .wrap{border-top:1px solid rgba(244,242,236,.16);padding-top:28px;display:flex;gap:16px 28px;flex-wrap:wrap;justify-content:space-between;align-items:center}
 footer .brand{color:var(--ink-neg);--logo-ink:var(--ink-neg)}
-/* símbolo sobre marinho: faixas tonais mais claras */
-.hero .mark,footer .brand{--s1:#5867A0;--s2:#7F8DBF;--s3:#AAB4D8}
 footer .brand:hover{color:var(--ink-neg)}
 footer .brand .sub{color:rgba(244,242,236,.6)}
 .foot-meta{display:flex;flex-direction:column;gap:4px;text-align:right}
@@ -232,10 +228,8 @@ footer .brand .sub{color:rgba(244,242,236,.6)}
   <symbol id="sym" viewBox="8 8 154 124">
     <!-- face sólida: o compromisso -->
     <polygon style="fill:var(--logo-ink,#1B2340)" points="50,30 10,130 90,130"/>
-    <!-- face lateral: variante tonal do manual, em tons de marinho -->
-    <polygon style="fill:var(--s1)" points="50,30 73.3,23.3 113.3,123.3 90,130"/>
-    <polygon style="fill:var(--s2)" points="73.3,23.3 96.7,16.7 136.7,116.7 113.3,123.3"/>
-    <polygon style="fill:var(--s3)" points="96.7,16.7 120,10 160,110 136.7,116.7"/>
+    <!-- face lateral: o que o compromisso produz -->
+    <polygon style="fill:var(--logo-side,#E8906A)" points="50,30 120,10 160,110 90,130"/>
   </symbol>
 </svg>
 <a class="sr" href="#propostas">Ir para as propostas</a>
@@ -254,7 +248,7 @@ footer .brand .sub{color:rgba(244,242,236,.6)}
 
 <main>
 <section class="hero" id="inicio">
-  <div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+  <svg class="facets" viewBox="0 0 170 140" aria-hidden="true"><polygon points="50,30 10,130 90,130"/><polygon points="50,30 120,10 160,110 90,130"/><line x1="50" y1="30" x2="90" y2="130"/></svg>
   <div class="wrap hero-in">
     <div class="hero-txt">
       <span class="eyebrow">Chapa · Grêmio Politécnico</span>
@@ -353,7 +347,7 @@ footer .brand .sub{color:rgba(244,242,236,.6)}
 </section>
 
 <section id="participe">
-  <div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+  <svg class="facets" viewBox="0 0 170 140" aria-hidden="true"><polygon points="50,30 10,130 90,130"/><polygon points="50,30 120,10 160,110 90,130"/><line x1="50" y1="30" x2="90" y2="130"/></svg>
   <div class="wrap">
     <h2>Participe</h2>
     <div class="two">
