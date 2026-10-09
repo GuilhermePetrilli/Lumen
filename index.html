@@ -14,16 +14,18 @@
 /* Identidade Prisma — paleta oficial do manual */
 :root{
   --navy:#1B2340;   /* Marinho: base, texto (60%) */
-  --paper:#FAF9F6;  /* Papel: fundo (30%) */
+  --paper:#FFFBF6;  /* Papel, levemente mais quente */
+  --cream:#FCEFE3;  /* creme pêssego: primeira tela */
+  --night:#2A3666;  /* marinho suavizado: seções escuras */
   --ink-neg:#F4F2EC;/* face do prisma / texto sobre marinho */
-  --coral:#E8906A;  /* acento único — oklch .75 .15 40 */
-  --slate:#5C6C9E;  /* marinho médio (variante tonal) */
-  --slate-l:#C9CFE0;/* marinho claro (variante tonal) */
-  --coral-d:#C4673F;/* coral escuro: hover e foco */
-  --paper2:#EDEBE5; /* fundo alternado */
+  --coral:#EE9468;  /* acento único, coral mais vivo e quente */
+  --slate:#5A6AAB;  /* azul-lavanda médio */
+  --slate-l:#D3DAF2;/* azul-lavanda claro */
+  --coral-d:#C95F33;/* coral escuro: hover, foco e destaque sobre creme */
+  --paper2:#F6EEE5; /* fundo alternado, creme */
   --ink2:#3A4160;   /* texto secundário */
   --ink3:#5A607A;
-  --line:#D6D3CA;
+  --line:#E6DCCF;
   --r:2px;
   --fh:Archivo,system-ui,sans-serif;
   --fb:Archivo,system-ui,sans-serif;
@@ -43,7 +45,7 @@ p{margin:0 0 1em} a{color:var(--navy)} a:hover{color:var(--coral-d)}
 section{padding:80px 0}
 .sr{position:absolute;left:-9999px}
 .mono,.eyebrow{font-family:var(--fm);font-weight:500;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase}
-.eyebrow{display:block;color:var(--slate-l);margin-bottom:18px}
+.eyebrow{display:block;color:var(--slate);margin-bottom:18px}
 /* ornamento: o prisma em desenho técnico (linhas finas), sem preenchimento */
 .facets{display:block;height:auto;pointer-events:none}
 .facets *{fill:none;stroke:rgba(244,242,236,.13);stroke-width:1.25;vector-effect:non-scaling-stroke}
@@ -88,18 +90,19 @@ nav .btn:hover{box-shadow:none}
 }
 
 /* hero — versão negativa (marinho) com grade técnica e o prisma em desenho de linhas */
-.hero{background-color:var(--navy);background-image:linear-gradient(rgba(244,242,236,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(244,242,236,.04) 1px,transparent 1px);background-size:48px 48px;background-position:center top;color:var(--ink-neg);padding:0;overflow:hidden;position:relative;display:flex;flex-direction:column;
+.hero{background-color:var(--cream);background-image:linear-gradient(rgba(27,35,64,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(27,35,64,.05) 1px,transparent 1px);background-size:48px 48px;background-position:center top;color:var(--navy);padding:0;overflow:hidden;position:relative;display:flex;flex-direction:column;
   min-height:max(560px,calc(100vh - 68px));min-height:max(560px,calc(100svh - 68px))}
+.hero .facets *{stroke:rgba(27,35,64,.14)}
 .hero .facets{position:absolute;right:-140px;bottom:-170px;width:min(820px,70vw);z-index:0}
 .hero-in{position:relative;z-index:1;flex:1;width:100%;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:center;gap:56px;padding-top:56px;padding-bottom:56px}
 .hero h1{margin-bottom:.35em}
-.hero .hl{white-space:nowrap}
-.hero p.lead{font-size:clamp(1.1rem,1.6vw,1.28rem);line-height:1.55;max-width:36ch;color:rgba(244,242,236,.8);text-wrap:pretty;margin-bottom:0}
+.hero .hl{white-space:nowrap;color:var(--coral-d)}
+.hero p.lead{font-size:clamp(1.1rem,1.6vw,1.28rem);line-height:1.55;max-width:36ch;color:var(--ink2);text-wrap:pretty;margin-bottom:0}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
-.hero .btn.ghost{color:var(--ink-neg)}
-.hero .mark{display:block;width:100%;max-width:300px;height:auto;aspect-ratio:154/124;justify-self:start;--logo-ink:var(--ink-neg)}
-.hero-foot{position:relative;z-index:1;border-top:1px solid rgba(244,242,236,.16)}
-.hero-foot .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:18px;color:rgba(244,242,236,.62)}
+.hero .btn.ghost{color:var(--navy)}
+.hero .mark{display:block;width:100%;max-width:300px;height:auto;aspect-ratio:154/124;justify-self:start}
+.hero-foot{position:relative;z-index:1;border-top:1px solid rgba(27,35,64,.12)}
+.hero-foot .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:18px;color:var(--ink3)}
 
 @media(max-width:900px){
   .hero-in{grid-template-columns:1fr;gap:0;padding-top:40px}
@@ -197,18 +200,18 @@ details[open] summary::after{content:"–"}
 details p{margin:12px 0 0;max-width:70ch}
 
 /* participe */
-#participe{background:var(--navy);color:var(--ink-neg);position:relative;overflow:hidden}
+#participe{background:var(--night);color:var(--ink-neg);position:relative;overflow:hidden}
 #participe .wrap{position:relative;z-index:1}
 #participe .facets{position:absolute;right:-60px;bottom:-90px;width:min(520px,80vw);z-index:0}
 @media(max-width:900px){#participe .facets{opacity:.5}}
 #participe a{color:var(--coral)}
 #participe .btn{color:var(--navy)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(244,242,236,.18);background:var(--navy)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(244,242,236,.2);background:var(--night)}
 @media(max-width:820px){.two{grid-template-columns:1fr}}
 .two div{padding:24px}
 .two div + div{border-left:1px solid rgba(244,242,236,.18)}
 @media(max-width:820px){.two div + div{border-left:0;border-top:1px solid rgba(244,242,236,.18)}}
-footer{background:var(--navy);color:rgba(244,242,236,.75);padding:0 0 88px;font-size:.9rem}
+footer{background:var(--night);color:rgba(244,242,236,.75);padding:0 0 88px;font-size:.9rem}
 footer .wrap{border-top:1px solid rgba(244,242,236,.16);padding-top:28px;display:flex;gap:16px 28px;flex-wrap:wrap;justify-content:space-between;align-items:center}
 footer .brand{color:var(--ink-neg);--logo-ink:var(--ink-neg)}
 footer .brand:hover{color:var(--ink-neg)}
